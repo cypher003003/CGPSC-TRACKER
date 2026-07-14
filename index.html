@@ -1,559 +1,1060 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CGPSC Master Portal</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPSC Master Portal</title>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: #0a0f1e;
-  color: #fff;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
+  <style>
+    :root {
+      --bg-1: #050816;
+      --bg-2: #0a1024;
+      --bg-3: #101b3b;
+      --primary: #60a5fa;
+      --secondary: #22d3ee;
+      --accent: #a78bfa;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,0.08);
+      --glass: rgba(255,255,255,0.07);
+      --glass-strong: rgba(255,255,255,0.11);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
 
-/* Animated Background Canvas */
-#bg-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Floating Gradient Orbs */
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  z-index: 0;
-  pointer-events: none;
-  animation: orbFloat 20s ease-in-out infinite;
-}
-.orb-1 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, #2563eb, transparent 70%);
-  top: -10%; left: -10%;
-  animation-delay: 0s;
-}
-.orb-2 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, #0ea5e9, transparent 70%);
-  bottom: -10%; right: -10%;
-  animation-delay: -7s;
-}
-.orb-3 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, #8b5cf6, transparent 70%);
-  top: 40%; left: 60%;
-  animation-delay: -14s;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -40px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(96,165,250,0.16), transparent 24%),
+        radial-gradient(circle at 80% 15%, rgba(34,211,238,0.12), transparent 22%),
+        radial-gradient(circle at 50% 85%, rgba(167,139,250,0.14), transparent 28%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-/* Header */
-header {
-  position: relative;
-  z-index: 1;
-  padding: 60px 20px 40px;
-  text-align: center;
-  overflow: hidden;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-header::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(14, 165, 233, 0.15));
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  z-index: -1;
-}
+    /* Background layers */
+    #bg-canvas,
+    #constellation-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.header-content {
-  position: relative;
-  z-index: 2;
-}
+    #constellation-canvas {
+      opacity: 0.6;
+    }
 
-header h1 {
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, #fff 0%, #7dd3fc 50%, #fff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shine 4s linear infinite;
-  margin-bottom: 12px;
-  text-shadow: 0 0 60px rgba(37, 99, 235, 0.3);
-}
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+      opacity: 0.4;
+      animation: driftGrid 18s linear infinite;
+    }
 
-@keyframes shine {
-  to { background-position: 200% center; }
-}
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
 
-header p {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: #94a3b8;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+    .orb-1 {
+      width: 430px;
+      height: 430px;
+      background: radial-gradient(circle, rgba(96,165,250,0.95), transparent 68%);
+      top: -100px;
+      left: -80px;
+    }
 
-.creator-badge {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 28px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(139, 92, 246, 0.2));
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #e2e8f0;
-  backdrop-filter: blur(10px);
-  animation: pulseBadge 3s ease-in-out infinite;
-}
+    .orb-2 {
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(34,211,238,0.85), transparent 70%);
+      bottom: -80px;
+      right: -60px;
+      animation-delay: -7s;
+    }
 
-@keyframes pulseBadge {
-  0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
-  50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.4); }
-}
+    .orb-3 {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(167,139,250,0.8), transparent 68%);
+      top: 35%;
+      left: 65%;
+      animation-delay: -12s;
+    }
 
-/* Grid */
-.grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  padding: 40px 30px 60px;
-  max-width: 1300px;
-  margin: auto;
-}
+    .mouse-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle, rgba(96,165,250,0.18), transparent 62%);
+      transform: translate(-50%, -50%);
+      transition: opacity 0.25s ease;
+      opacity: 0.9;
+      filter: blur(10px);
+    }
 
-/* Cards */
-.card {
-  position: relative;
-  background: rgba(30, 41, 59, 0.6);
-  border-radius: 24px;
-  padding: 32px;
-  text-decoration: none;
-  color: #fff;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: cardEnter 0.6s ease forwards;
-}
+    .study-symbol {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      animation: floatStudy linear forwards;
+      user-select: none;
+      text-shadow: 0 0 30px rgba(255,255,255,0.18);
+    }
 
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
+    .wrapper {
+      position: relative;
+      z-index: 1;
+    }
 
-@keyframes cardEnter {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* Header */
+    header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 34px 22px 10px;
+    }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(139, 92, 246, 0.1));
-  opacity: 0;
-  transition: opacity 0.4s;
-  z-index: 0;
-}
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
 
-.card::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-  z-index: 0;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-.card:hover {
-  transform: translateY(-12px) scale(1.02);
-  border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25), 0 0 0 1px rgba(37, 99, 235, 0.2);
-}
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(96,165,250,0.25), rgba(167,139,250,0.25));
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.4rem;
+      box-shadow: 0 10px 25px rgba(96,165,250,0.15);
+    }
 
-.card:hover::before,
-.card:hover::after {
-  opacity: 1;
-}
+    .brand-text h2 {
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      color: #dbeafe;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
 
-.card-icon {
-  font-size: 2.8rem;
-  margin-bottom: 16px;
-  display: block;
-  transition: transform 0.4s;
-  position: relative;
-  z-index: 1;
-}
+    .brand-text p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
 
-.card:hover .card-icon {
-  transform: scale(1.2) rotate(-5deg);
-}
+    .created-pill {
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,211,238,0.14));
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #eef6ff;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      animation: pulseGlow 3.2s ease-in-out infinite;
+    }
 
-.card h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
-  transition: color 0.3s;
-}
+    /* Hero */
+    .hero {
+      max-width: 1280px;
+      margin: 18px auto 0;
+      padding: 28px 22px 20px;
+    }
 
-.card:hover h2 {
-  color: #7dd3fc;
-}
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        radial-gradient(circle at top right, rgba(96,165,250,0.18), transparent 32%);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      padding: 54px 32px 86px;
+      isolation: isolate;
+    }
 
-.card small {
-  color: #94a3b8;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  z-index: 1;
-  transition: color 0.3s;
-}
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.07) 35%, transparent 50%);
+      transform: translateX(-120%);
+      animation: shimmer 6s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.card:hover small {
-  color: #cbd5e1;
-}
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 840px;
+    }
 
-.arrow {
-  transition: transform 0.3s;
-}
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.45);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
 
-.card:hover .arrow {
-  transform: translateX(6px);
-}
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5.4rem);
+      line-height: 0.96;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #93c5fd 35%, #67e8f9 62%, #ffffff 100%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: titleFlow 5s linear infinite;
+      text-shadow: 0 0 35px rgba(96,165,250,0.18);
+    }
 
-/* Progress bar animation on cards */
-.card-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 0;
-  background: linear-gradient(90deg, #2563eb, #0ea5e9, #8b5cf6);
-  transition: width 0.5s ease;
-  border-radius: 0 0 0 24px;
-}
+    .hero p {
+      max-width: 720px;
+      color: #cbd5e1;
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      line-height: 1.7;
+    }
 
-.card:hover .card-progress {
-  width: 100%;
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
 
-/* Footer */
-footer {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 30px 20px 50px;
-  color: #64748b;
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 600;
+      transition: 0.35s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
 
-footer strong {
-  color: #94a3b8;
-  font-weight: 600;
-}
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      box-shadow: 0 12px 30px rgba(37,99,235,0.35);
+    }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
-  color: #64748b;
-  font-size: 1.5rem;
-}
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
+      backdrop-filter: blur(8px);
+    }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-  40% { transform: translateX(-50%) translateY(-10px); }
-  60% { transform: translateX(-50%) translateY(-5px); }
-}
+    .btn:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .grid {
-    padding: 30px 16px 40px;
-    gap: 16px;
-  }
-  .card {
-    padding: 24px;
-  }
-}
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
 
-/* Particle overlay for study icons */
-.study-particle {
-  position: fixed;
-  font-size: 1.5rem;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-  animation: floatParticle 25s linear infinite;
-}
+    .stat {
+      min-width: 155px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(8,15,35,0.52);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      transition: 0.35s ease;
+    }
 
-@keyframes floatParticle {
-  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.08; }
-  90% { opacity: 0.08; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
-</style>
-<base target="_blank">
+    .stat:hover {
+      transform: translateY(-5px);
+      border-color: rgba(96,165,250,0.3);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 4px;
+      color: #f8fbff;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      left: 32px;
+      bottom: 26px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      z-index: 2;
+      animation: bounceSoft 2s ease-in-out infinite;
+    }
+
+    /* Section title */
+    .section-head {
+      max-width: 1280px;
+      margin: 28px auto 0;
+      padding: 0 22px;
+    }
+
+    .section-head h3 {
+      font-size: 1.2rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #dbeafe;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    /* Cards */
+    .grid {
+      max-width: 1280px;
+      margin: 18px auto 0;
+      padding: 0 22px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.045));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: translateY(40px);
+      opacity: 0;
+      animation: revealCard 0.7s forwards;
+      transition: 0.45s cubic-bezier(.2,.8,.2,1);
+      isolation: isolate;
+    }
+
+    .card:nth-child(1) { animation-delay: .08s; }
+    .card:nth-child(2) { animation-delay: .16s; }
+    .card:nth-child(3) { animation-delay: .24s; }
+    .card:nth-child(4) { animation-delay: .32s; }
+    .card:nth-child(5) { animation-delay: .40s; }
+    .card:nth-child(6) { animation-delay: .48s; }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(140deg, rgba(96,165,250,0.14), transparent 35%, rgba(167,139,250,0.12));
+      opacity: 0;
+      transition: 0.45s ease;
+      z-index: 0;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 65%);
+      opacity: 0;
+      transition: 0.45s ease;
+      z-index: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) rotateX(3deg) rotateY(-2deg);
+      border-color: rgba(96,165,250,0.28);
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(96,165,250,0.16),
+        0 0 50px rgba(37,99,235,0.16);
+    }
+
+    .card:hover::before,
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card-top,
+    .card-bottom,
+    .card h2,
+    .card p {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.9rem;
+      background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(167,139,250,0.18));
+      border: 1px solid rgba(255,255,255,0.09);
+      transition: 0.35s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.12) rotate(-6deg);
+      box-shadow: 0 14px 34px rgba(96,165,250,0.2);
+    }
+
+    .card-badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #bfdbfe;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .card h2 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+      color: #f8fbff;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover h2 {
+      color: #7dd3fc;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      line-height: 1.65;
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-link {
+      color: #e2e8f0;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .arrow {
+      transform: translateX(7px);
+    }
+
+    .card-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 4px;
+      border-radius: 0 999px 999px 0;
+      background: linear-gradient(90deg, #2563eb, #22d3ee, #a78bfa);
+      transition: width 0.45s ease;
+      z-index: 2;
+    }
+
+    .card:hover .card-progress {
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 8px 22px 50px;
+    }
+
+    .footer-box {
+      border-radius: 24px;
+      padding: 24px;
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .footer-box strong {
+      color: #eef6ff;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-box p {
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    /* Keyframes */
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(22px,-32px) scale(1.08); }
+      66% { transform: translate(-18px,18px) scale(0.95); }
+    }
+
+    @keyframes driftGrid {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-14px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes shimmer {
+      to { transform: translateX(120%); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 rgba(96,165,250,0.0), 0 0 24px rgba(96,165,250,0.12);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(96,165,250,0.2), 0 0 36px rgba(96,165,250,0.2);
+      }
+    }
+
+    @keyframes titleFlow {
+      to { background-position: 220% center; }
+    }
+
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes revealCard {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatStudy {
+      0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.08;
+      }
+      90% {
+        opacity: 0.08;
+      }
+      100% {
+        transform: translateY(-15vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .created-pill {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-card {
+        padding: 40px 22px 74px;
+      }
+
+      .hero-scroll {
+        left: 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        line-height: 1;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .stat {
+        min-width: calc(50% - 7px);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="constellation-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="mouse-glow" id="mouseGlow"></div>
 
-<!-- Background Canvas for Particles -->
-<canvas id="bg-canvas"></canvas>
+  <div class="wrapper">
+    <header>
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-logo">🎓</div>
+          <div class="brand-text">
+            <h2>CGPSC Master Portal</h2>
+            <p>Smart preparation dashboard for focused study</p>
+          </div>
+        </div>
+        <div class="created-pill">Created by PRASHANT KUMAR</div>
+      </div>
+    </header>
 
-<!-- Gradient Orbs -->
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="tagline">📚 Animated Study Portal Experience</div>
+          <h1>Study Smarter.<br />Aim Higher.</h1>
+          <p>
+            A modern CGPSC preparation dashboard with immersive motion effects,
+            glowing study-themed backgrounds, premium cards, and a clean layout
+            that feels powerful, focused, and inspiring every time you open it.
+          </p>
 
-<!-- Floating Study Particles -->
-<div id="particles-container"></div>
+          <div class="hero-actions">
+            <a href="#modules" class="btn btn-primary">Explore Modules ✨</a>
+            <a href="#footer" class="btn btn-secondary">View Credits</a>
+          </div>
 
-<header>
-  <div class="header-content">
-    <h1>CGPSC MASTER PORTAL</h1>
-    <p>Unified Study Dashboard</p>
-    <div class="creator-badge">Created by Prashant Kumar</div>
+          <div class="hero-stats">
+            <div class="stat">
+              <b>6+</b>
+              <span>Focused learning modules</span>
+            </div>
+            <div class="stat">
+              <b>24/7</b>
+              <span>Motivating study environment</span>
+            </div>
+            <div class="stat">
+              <b>100%</b>
+              <span>Responsive and animated UI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-scroll">↓ Scroll to explore</div>
+      </div>
+    </section>
+
+    <section class="section-head" id="modules">
+      <h3>Study Modules</h3>
+      <p>Select a subject and enter a visually enhanced learning space.</p>
+    </section>
+
+    <main class="grid">
+      <a class="card" href="history.html">
+        <div class="card-top">
+          <div class="card-icon">📖</div>
+          <div class="card-badge">Core</div>
+        </div>
+        <h2>History & Polity</h2>
+        <p>Dive into historical foundations, constitutional structure, governance concepts, and political understanding with clarity.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="language.html">
+        <div class="card-top">
+          <div class="card-icon">📝</div>
+          <div class="card-badge">Language</div>
+        </div>
+        <h2>Language</h2>
+        <p>Strengthen grammar, comprehension, expression, and answer presentation for better exam performance and confidence.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="science.html">
+        <div class="card-top">
+          <div class="card-icon">🔬</div>
+          <div class="card-badge">Concepts</div>
+        </div>
+        <h2>General Science</h2>
+        <p>Learn essential scientific facts, applications, and everyday concepts through an organized and visually attractive interface.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="welfare.html">
+        <div class="card-top">
+          <div class="card-icon">🏅</div>
+          <div class="card-badge">Society</div>
+        </div>
+        <h2>Welfare, Sports & Education</h2>
+        <p>Track important welfare initiatives, sports developments, and education topics in one polished and accessible section.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="economics.html">
+        <div class="card-top">
+          <div class="card-icon">🌍</div>
+          <div class="card-badge">Analysis</div>
+        </div>
+        <h2>Economics & Geography</h2>
+        <p>Understand maps, resources, economic systems, development indicators, and regional patterns with a better visual flow.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="tracker.html">
+        <div class="card-top">
+          <div class="card-icon">📊</div>
+          <div class="card-badge">Planner</div>
+        </div>
+        <h2>UPSC Tracker</h2>
+        <p>Organize progress, monitor consistency, and keep your preparation disciplined using a dashboard-style tracking experience.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+    </main>
+
+    <footer id="footer">
+      <div class="footer-box">
+        <strong>Created by PRASHANT KUMAR</strong>
+        <p>
+          Designed for CGPSC preparation with premium animations, study-themed visual effects,
+          and a focused interface that feels modern, energetic, and professional.
+        </p>
+      </div>
+    </footer>
   </div>
-</header>
 
-<div class="grid">
-  <a class="card" href="history.html">
-    <span class="card-icon">&#128214;</span>
-    <h2>History & Polity</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
+  <script>
+    const mouseGlow = document.getElementById("mouseGlow");
+    window.addEventListener("mousemove", (e) => {
+      mouseGlow.style.left = e.clientX + "px";
+      mouseGlow.style.top = e.clientY + "px";
+    });
 
-  <a class="card" href="language.html">
-    <span class="card-icon">&#128221;</span>
-    <h2>Language</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
+    /* Canvas 1: soft floating particles */
+    const bgCanvas = document.getElementById("bg-canvas");
+    const bgCtx = bgCanvas.getContext("2d");
 
-  <a class="card" href="science.html">
-    <span class="card-icon">&#128300;</span>
-    <h2>General Science</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
+    let w = 0;
+    let h = 0;
+    let particles = [];
 
-  <a class="card" href="welfare.html">
-    <span class="card-icon">&#127963;</span>
-    <h2>Welfare, Sports & Education</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
+    function resizeAll() {
+      w = bgCanvas.width = window.innerWidth;
+      h = bgCanvas.height = window.innerHeight;
+      constellationCanvas.width = window.innerWidth;
+      constellationCanvas.height = window.innerHeight;
+      buildConstellationNodes();
+    }
 
-  <a class="card" href="economics.html">
-    <span class="card-icon">&#127758;</span>
-    <h2>Economics & Geography</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
-
-  <a class="card" href="tracker.html">
-    <span class="card-icon">&#128218;</span>
-    <h2>UPSC Tracker</h2>
-    <small>Open Module <span class="arrow">→</span></small>
-    <div class="card-progress"></div>
-  </a>
-</div>
-
-<footer>
-  <strong>Created by Prashant Kumar</strong><br>
-  Developed for CGPSC Preparation
-</footer>
-
-<script>
-// Canvas Particle Network
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let width, height;
-let particles = [];
-let mouse = { x: null, y: null };
-
-function resize() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resize);
-resize();
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
-    this.vx = (Math.random() - 0.5) * 0.4;
-    this.vy = (Math.random() - 0.5) * 0.4;
-    this.size = Math.random() * 2 + 1;
-    this.opacity = Math.random() * 0.5 + 0.2;
-  }
-
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-
-    if (this.x < 0 || this.x > width) this.vx *= -1;
-    if (this.y < 0 || this.y > height) this.vy *= -1;
-
-    // Mouse interaction
-    if (mouse.x != null) {
-      const dx = mouse.x - this.x;
-      const dy = mouse.y - this.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 150) {
-        this.x -= dx * 0.02;
-        this.y -= dy * 0.02;
+    class SoftParticle {
+      constructor() {
+        this.reset();
+        this.y = Math.random() * h;
+      }
+      reset() {
+        this.x = Math.random() * w;
+        this.y = h + Math.random() * 100;
+        this.size = Math.random() * 2.2 + 0.8;
+        this.speedY = Math.random() * 0.35 + 0.15;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.45 + 0.12;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y -= this.speedY;
+        if (this.y < -20) this.reset();
+      }
+      draw() {
+        bgCtx.beginPath();
+        bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        bgCtx.fillStyle = `rgba(125, 211, 252, ${this.alpha})`;
+        bgCtx.shadowBlur = 20;
+        bgCtx.shadowColor = "rgba(96,165,250,0.35)";
+        bgCtx.fill();
+        bgCtx.shadowBlur = 0;
       }
     }
-  }
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(125, 211, 252, ${this.opacity})`;
-    ctx.fill();
-  }
-}
-
-// Create particles
-for (let i = 0; i < 60; i++) {
-  particles.push(new Particle());
-}
-
-function drawConnections() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-
-      if (dist < 150) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(125, 211, 252, ${0.15 * (1 - dist/150)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
+    function initParticles() {
+      particles = [];
+      const total = Math.min(90, Math.floor(window.innerWidth / 16));
+      for (let i = 0; i < total; i++) {
+        particles.push(new SoftParticle());
       }
     }
-  }
-}
 
-function animate() {
-  ctx.clearRect(0, 0, width, height);
-
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-
-  drawConnections();
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-window.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-window.addEventListener('mouseleave', () => {
-  mouse.x = null;
-  mouse.y = null;
-});
-
-// Floating Study Icons
-const studyIcons = ['&#128214;', '&#127891;', '&#128161;', '&#9997;', '&#128221;', '&#128218;', '&#128300;', '&#128200;', '&#127919;', '&#128170;'];
-const container = document.getElementById('particles-container');
-
-function createStudyParticle() {
-  const el = document.createElement('div');
-  el.className = 'study-particle';
-  el.innerHTML = studyIcons[Math.floor(Math.random() * studyIcons.length)];
-  el.style.left = Math.random() * 100 + 'vw';
-  el.style.animationDuration = (20 + Math.random() * 20) + 's';
-  el.style.animationDelay = (Math.random() * 5) + 's';
-  el.style.fontSize = (1 + Math.random() * 2) + 'rem';
-  container.appendChild(el);
-
-  setTimeout(() => {
-    el.remove();
-  }, 45000);
-}
-
-// Create initial particles
-for (let i = 0; i < 15; i++) {
-  setTimeout(createStudyParticle, i * 800);
-}
-
-// Continue creating
-setInterval(createStudyParticle, 3000);
-
-// Intersection Observer for scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = 'running';
+    function animateParticles() {
+      bgCtx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
     }
-  });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('.card').forEach(card => {
-  observer.observe(card);
-});
-</script>
+    /* Canvas 2: constellation network */
+    const constellationCanvas = document.getElementById("constellation-canvas");
+    const cCtx = constellationCanvas.getContext("2d");
+    let nodes = [];
+    let pointer = { x: null, y: null };
 
+    class Node {
+      constructor() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.r = Math.random() * 1.8 + 0.8;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > window.innerWidth) this.vx *= -1;
+        if (this.y < 0 || this.y > window.innerHeight) this.vy *= -1;
+
+        if (pointer.x !== null) {
+          const dx = pointer.x - this.x;
+          const dy = pointer.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            this.x -= dx * 0.006;
+            this.y -= dy * 0.006;
+          }
+        }
+      }
+      draw() {
+        cCtx.beginPath();
+        cCtx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        cCtx.fillStyle = "rgba(191, 219, 254, 0.6)";
+        cCtx.fill();
+      }
+    }
+
+    function buildConstellationNodes() {
+      nodes = [];
+      const count = Math.min(55, Math.floor(window.innerWidth / 28));
+      for (let i = 0; i < count; i++) nodes.push(new Node());
+    }
+
+    function connectNodes() {
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            cCtx.beginPath();
+            cCtx.moveTo(nodes[i].x, nodes[i].y);
+            cCtx.lineTo(nodes[j].x, nodes[j].y);
+            cCtx.strokeStyle = `rgba(96, 165, 250, ${0.16 - dist / 900})`;
+            cCtx.lineWidth = 1;
+            cCtx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateConstellation() {
+      cCtx.clearRect(0, 0, constellationCanvas.width, constellationCanvas.height);
+      nodes.forEach(n => {
+        n.update();
+        n.draw();
+      });
+      connectNodes();
+      requestAnimationFrame(animateConstellation);
+    }
+
+    window.addEventListener("mousemove", (e) => {
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+    });
+
+    window.addEventListener("mouseleave", () => {
+      pointer.x = null;
+      pointer.y = null;
+    });
+
+    /* Floating study symbols */
+    const symbols = ["📚", "🎓", "📝", "💡", "📖", "📊", "🔬", "🌍", "🏅", "⏳"];
+
+    function createStudySymbol() {
+      const el = document.createElement("div");
+      el.className = "study-symbol";
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = (1 + Math.random() * 1.8) + "rem";
+      el.style.animationDuration = (16 + Math.random() * 16) + "s";
+      el.style.animationDelay = Math.random() * 2 + "s";
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 34000);
+    }
+
+    for (let i = 0; i < 18; i++) {
+      setTimeout(createStudySymbol, i * 700);
+    }
+    setInterval(createStudySymbol, 1800);
+
+    /* Card tilt */
+    document.querySelectorAll(".card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+
+        card.style.transform = `translateY(-12px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    resizeAll();
+    initParticles();
+    animateParticles();
+    animateConstellation();
+
+    window.addEventListener("resize", () => {
+      resizeAll();
+      initParticles();
+    });
+  </script>
 </body>
 </html>
