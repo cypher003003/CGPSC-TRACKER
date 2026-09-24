@@ -419,6 +419,8 @@
     .card:nth-child(4) { animation-delay: .32s; }
     .card:nth-child(5) { animation-delay: .40s; }
     .card:nth-child(6) { animation-delay: .48s; }
+    .card:nth-child(7) { animation-delay: .56s; }
+    .card:nth-child(8) { animation-delay: .64s; }
 
     .card::before {
       content: "";
@@ -561,6 +563,68 @@
 
     .card:hover .card-progress {
       width: 100%;
+    }
+
+    /* ===== PATWARI SECTION ACCENT ===== */
+    .patwari-grid .card::before {
+      background:
+        linear-gradient(140deg, rgba(245, 179, 66, 0.16), transparent 35%, rgba(167, 139, 250, 0.14));
+    }
+    .patwari-grid .card:hover {
+      border-color: rgba(245, 179, 66, 0.35);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(245, 179, 66, 0.22),
+        0 0 50px rgba(245, 179, 66, 0.18);
+    }
+    .patwari-grid .card-icon {
+      background: linear-gradient(135deg, rgba(245, 179, 66, 0.22), rgba(96, 165, 250, 0.18));
+    }
+    .patwari-grid .card-badge {
+      color: #fde68a;
+    }
+    .patwari-grid .card:hover h2 {
+      color: #fcd34d;
+    }
+    .patwari-grid .card-progress {
+      background: linear-gradient(90deg, #f5b342, #f59e0b, #a78bfa);
+    }
+
+    .patwari-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(245, 179, 66, 0.16), rgba(96, 165, 250, 0.12));
+      border: 1px solid rgba(245, 179, 66, 0.3);
+      color: #fde68a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .patwari-divider {
+      max-width: 1280px;
+      margin: 30px auto 0;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .patwari-divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,179,66,0.35), transparent);
+    }
+    .patwari-divider .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #f5b342;
+      box-shadow: 0 0 16px rgba(245,179,66,0.6);
     }
 
     /* Footer */
@@ -736,13 +800,13 @@
 
           <div class="hero-actions">
             <a href="#modules" class="btn btn-primary">Explore Modules ✨</a>
-            <a href="#footer" class="btn btn-secondary">View Credits</a>
+            <a href="#patwari" class="btn btn-secondary">Patwari 2022 📋</a>
           </div>
 
           <div class="hero-stats">
             <div class="stat">
-              <b>6+</b>
-              <span>Focused learning modules</span>
+              <b>14+</b>
+              <span>CGPSC &amp; Patwari modules</span>
             </div>
             <div class="stat">
               <b>24/7</b>
@@ -759,6 +823,7 @@
       </div>
     </section>
 
+    <!-- ================= CGPSC MODULES ================= -->
     <section class="section-head" id="modules">
       <h3>Study Modules</h3>
       <p>Select a subject and enter a visually enhanced learning space.</p>
@@ -770,7 +835,7 @@
           <div class="card-icon">📖</div>
           <div class="card-badge">Core</div>
         </div>
-        <h2>History & Polity</h2>
+        <h2>History &amp; Polity</h2>
         <p>Dive into historical foundations, constitutional structure, governance concepts, and political understanding with clarity.</p>
         <div class="card-bottom">
           <span class="card-link">Open Module <span class="arrow">→</span></span>
@@ -809,7 +874,7 @@
           <div class="card-icon">🏅</div>
           <div class="card-badge">Society</div>
         </div>
-        <h2>Welfare, Sports & Education</h2>
+        <h2>Welfare, Sports &amp; Education</h2>
         <p>Track important welfare initiatives, sports developments, and education topics in one polished and accessible section.</p>
         <div class="card-bottom">
           <span class="card-link">Open Module <span class="arrow">→</span></span>
@@ -822,7 +887,7 @@
           <div class="card-icon">🌍</div>
           <div class="card-badge">Analysis</div>
         </div>
-        <h2>Economics & Geography</h2>
+        <h2>Economics &amp; Geography</h2>
         <p>Understand maps, resources, economic systems, development indicators, and regional patterns with a better visual flow.</p>
         <div class="card-bottom">
           <span class="card-link">Open Module <span class="arrow">→</span></span>
@@ -844,11 +909,131 @@
       </a>
     </main>
 
+    <!-- ================= DIVIDER ================= -->
+    <div class="patwari-divider">
+      <span class="line"></span>
+      <span class="dot"></span>
+      <span class="line"></span>
+    </div>
+
+    <!-- ================= PATWARI SECTION ================= -->
+    <section class="section-head" id="patwari">
+      <span class="patwari-tagline">📋 Patwari Training Selection Examination – 2022</span>
+      <h3>Patwari 2022 — Syllabus Modules</h3>
+      <p>Total Questions: 150 &nbsp;|&nbsp; Total Marks: 150 — Select a subject to begin.</p>
+    </section>
+
+    <div class="grid patwari-grid" id="patwari-modules">
+      <a class="card" href="patwari.html#computer">
+        <div class="card-top">
+          <div class="card-icon">💻</div>
+          <div class="card-badge">20 Q · 20 Marks</div>
+        </div>
+        <h2>Computer Related General Knowledge</h2>
+        <p>Computer basics, main parts, printers, operating systems, office tools, internet, antivirus, multimedia, CD/DVD and search engines.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#hindi">
+        <div class="card-top">
+          <div class="card-icon">📖</div>
+          <div class="card-badge">10 Q · 10 Marks</div>
+        </div>
+        <h2>हिन्दी व्याकरण</h2>
+        <p>स्वर, व्यंजन, वर्तनी, लिंग, वचन, काल, संज्ञा, सर्वनाम, समास, संधि, रस, अलंकार, मुहावरे एवं लोकोक्तियाँ।</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#english">
+        <div class="card-top">
+          <div class="card-icon">🔤</div>
+          <div class="card-badge">10 Q · 10 Marks</div>
+        </div>
+        <h2>General English with Grammar</h2>
+        <p>Grammar essentials, sentence transformation (voice &amp; narration), vocabulary, synonyms, antonyms, idioms and proverbs.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#maths">
+        <div class="card-top">
+          <div class="card-icon">➗</div>
+          <div class="card-badge">30 Q · 30 Marks</div>
+        </div>
+        <h2>Mathematics</h2>
+        <p>Number system, HCF/LCM, algebra, ratio &amp; proportion, percentage, profit &amp; loss, SI &amp; CI, geometry and mensuration.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#mental-ability">
+        <div class="card-top">
+          <div class="card-icon">🧠</div>
+          <div class="card-badge">15 Q · 15 Marks</div>
+        </div>
+        <h2>General Mental Ability</h2>
+        <p>Logical reasoning, analogy, number &amp; letter series, missing numbers, figure-based questions, classification and patterns.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#gk">
+        <div class="card-top">
+          <div class="card-icon">🌍</div>
+          <div class="card-badge">35 Q · 35 Marks</div>
+        </div>
+        <h2>General Knowledge</h2>
+        <p>Indian polity &amp; constitution, history, national movement, geography, economy, and general science up to Class 10 level.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#current-affairs">
+        <div class="card-top">
+          <div class="card-icon">📰</div>
+          <div class="card-badge">15 Q · 15 Marks</div>
+        </div>
+        <h2>Current Affairs – Sports, National &amp; International</h2>
+        <p>Latest national and international events, Chhattisgarh-specific current affairs, and important sports information.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="patwari.html#cg-gk">
+        <div class="card-top">
+          <div class="card-icon">🏛️</div>
+          <div class="card-badge">15 Q · 15 Marks</div>
+        </div>
+        <h2>General Knowledge of Chhattisgarh</h2>
+        <p>History, geography, polity, economy, government schemes, awards, traditions, folk art, music and important personalities of Chhattisgarh.</p>
+        <div class="card-bottom">
+          <span class="card-link">Open Module <span class="arrow">→</span></span>
+        </div>
+        <div class="card-progress"></div>
+      </a>
+    </div>
+
     <footer id="footer">
       <div class="footer-box">
         <strong>Created by PRASHANT KUMAR</strong>
         <p>
-          Designed for CGPSC preparation with premium animations, study-themed visual effects,
+          Designed for CGPSC &amp; Patwari preparation with premium animations, study-themed visual effects,
           and a focused interface that feels modern, energetic, and professional.
         </p>
       </div>
@@ -1008,7 +1193,7 @@
     });
 
     /* Floating study symbols */
-    const symbols = ["📚", "🎓", "📝", "💡", "📖", "📊", "🔬", "🌍", "🏅", "⏳"];
+    const symbols = ["📚", "🎓", "📝", "💡", "📖", "📊", "🔬", "🌍", "🏅", "⏳", "📋"];
 
     function createStudySymbol() {
       const el = document.createElement("div");
