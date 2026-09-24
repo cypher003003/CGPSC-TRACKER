@@ -25,15 +25,8 @@
       --shadow: 0 20px 60px rgba(0,0,0,0.45);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Outfit', sans-serif;
@@ -48,31 +41,16 @@
       position: relative;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* Background layers */
-    #bg-canvas,
-    #constellation-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
+    #bg-canvas, #constellation-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
     }
-
-    #constellation-canvas {
-      opacity: 0.6;
-    }
+    #constellation-canvas { opacity: 0.6; }
 
     .grid-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
@@ -83,83 +61,35 @@
     }
 
     .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; border-radius: 50%; filter: blur(90px);
+      opacity: 0.35; z-index: 0; pointer-events: none;
       animation: orbFloat 20s ease-in-out infinite;
     }
-
-    .orb-1 {
-      width: 430px;
-      height: 430px;
-      background: radial-gradient(circle, rgba(96,165,250,0.95), transparent 68%);
-      top: -100px;
-      left: -80px;
-    }
-
-    .orb-2 {
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(34,211,238,0.85), transparent 70%);
-      bottom: -80px;
-      right: -60px;
-      animation-delay: -7s;
-    }
-
-    .orb-3 {
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(167,139,250,0.8), transparent 68%);
-      top: 35%;
-      left: 65%;
-      animation-delay: -12s;
-    }
+    .orb-1 { width: 430px; height: 430px; background: radial-gradient(circle, rgba(96,165,250,0.95), transparent 68%); top: -100px; left: -80px; }
+    .orb-2 { width: 340px; height: 340px; background: radial-gradient(circle, rgba(34,211,238,0.85), transparent 70%); bottom: -80px; right: -60px; animation-delay: -7s; }
+    .orb-3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(167,139,250,0.8), transparent 68%); top: 35%; left: 65%; animation-delay: -12s; }
 
     .mouse-glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; width: 300px; height: 300px; border-radius: 50%;
+      pointer-events: none; z-index: 0;
       background: radial-gradient(circle, rgba(96,165,250,0.18), transparent 62%);
       transform: translate(-50%, -50%);
-      transition: opacity 0.25s ease;
-      opacity: 0.9;
-      filter: blur(10px);
+      transition: opacity 0.25s ease; opacity: 0.9; filter: blur(10px);
     }
 
     .study-symbol {
-      position: fixed;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      animation: floatStudy linear forwards;
-      user-select: none;
+      position: fixed; z-index: 0; pointer-events: none; opacity: 0.08;
+      animation: floatStudy linear forwards; user-select: none;
       text-shadow: 0 0 30px rgba(255,255,255,0.18);
     }
 
-    .wrapper {
-      position: relative;
-      z-index: 1;
-    }
+    .wrapper { position: relative; z-index: 1; }
 
-    /* Header */
-    header {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 34px 22px 10px;
-    }
+    header { max-width: 1280px; margin: 0 auto; padding: 34px 22px 10px; }
 
     .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 14px 18px;
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--line);
       backdrop-filter: blur(14px);
@@ -167,18 +97,11 @@
       box-shadow: var(--shadow);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .brand { display: flex; align-items: center; gap: 14px; }
 
     .brand-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
+      width: 48px; height: 48px; border-radius: 14px;
+      display: grid; place-items: center;
       background: linear-gradient(135deg, rgba(96,165,250,0.25), rgba(167,139,250,0.25));
       border: 1px solid rgba(255,255,255,0.12);
       font-size: 1.4rem;
@@ -186,42 +109,25 @@
     }
 
     .brand-text h2 {
-      font-size: 1rem;
-      letter-spacing: 0.18em;
-      color: #dbeafe;
-      text-transform: uppercase;
-      margin-bottom: 2px;
+      font-size: 1rem; letter-spacing: 0.18em; color: #dbeafe;
+      text-transform: uppercase; margin-bottom: 2px;
     }
-
-    .brand-text p {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
+    .brand-text p { color: var(--muted); font-size: 0.88rem; }
 
     .created-pill {
-      padding: 11px 18px;
-      border-radius: 999px;
+      padding: 11px 18px; border-radius: 999px;
       background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,211,238,0.14));
       border: 1px solid rgba(255,255,255,0.12);
-      color: #eef6ff;
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      color: #eef6ff; font-size: 0.82rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
       white-space: nowrap;
       animation: pulseGlow 3.2s ease-in-out infinite;
     }
 
-    /* Hero */
-    .hero {
-      max-width: 1280px;
-      margin: 18px auto 0;
-      padding: 28px 22px 20px;
-    }
+    .hero { max-width: 1280px; margin: 18px auto 0; padding: 28px 22px 20px; }
 
     .hero-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 32px;
+      position: relative; overflow: hidden; border-radius: 32px;
       border: 1px solid rgba(255,255,255,0.1);
       background:
         linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
@@ -233,44 +139,29 @@
     }
 
     .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.07) 35%, transparent 50%);
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.07) 35%, transparent 50%);
       transform: translateX(-120%);
       animation: shimmer 6s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 840px;
-    }
+    .hero-content { position: relative; z-index: 2; max-width: 840px; }
 
     .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 16px;
-      border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 9px 16px; border-radius: 999px;
       background: rgba(15,23,42,0.45);
       border: 1px solid rgba(255,255,255,0.1);
-      color: #cbd5e1;
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      color: #cbd5e1; font-size: 0.82rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
       margin-bottom: 18px;
     }
 
     .hero h1 {
       font-size: clamp(2.5rem, 6vw, 5.4rem);
-      line-height: 0.96;
-      font-weight: 900;
-      letter-spacing: -0.05em;
-      margin-bottom: 16px;
+      line-height: 0.96; font-weight: 900;
+      letter-spacing: -0.05em; margin-bottom: 16px;
       background: linear-gradient(135deg, #ffffff 0%, #93c5fd 35%, #67e8f9 62%, #ffffff 100%);
       background-size: 220% auto;
       -webkit-background-clip: text;
@@ -280,117 +171,52 @@
     }
 
     .hero p {
-      max-width: 720px;
-      color: #cbd5e1;
+      max-width: 720px; color: #cbd5e1;
       font-size: clamp(1rem, 2.2vw, 1.18rem);
       line-height: 1.7;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 20px;
-      border-radius: 16px;
-      font-weight: 600;
-      transition: 0.35s ease;
-      border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 20px; border-radius: 16px; font-weight: 600;
+      transition: 0.35s ease; border: 1px solid rgba(255,255,255,0.12);
     }
+    .btn-primary { background: linear-gradient(135deg, #2563eb, #0ea5e9); box-shadow: 0 12px 30px rgba(37,99,235,0.35); }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: #e2e8f0; backdrop-filter: blur(8px); }
+    .btn:hover { transform: translateY(-4px) scale(1.02); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #2563eb, #0ea5e9);
-      box-shadow: 0 12px 30px rgba(37,99,235,0.35);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.06);
-      color: #e2e8f0;
-      backdrop-filter: blur(8px);
-    }
-
-    .btn:hover {
-      transform: translateY(-4px) scale(1.02);
-    }
-
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
-    }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
 
     .stat {
-      min-width: 155px;
-      padding: 16px 18px;
-      border-radius: 18px;
+      min-width: 155px; padding: 16px 18px; border-radius: 18px;
       background: rgba(8,15,35,0.52);
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
       backdrop-filter: blur(10px);
       transition: 0.35s ease;
     }
-
-    .stat:hover {
-      transform: translateY(-5px);
-      border-color: rgba(96,165,250,0.3);
-    }
-
-    .stat b {
-      display: block;
-      font-size: 1.45rem;
-      margin-bottom: 4px;
-      color: #f8fbff;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
+    .stat:hover { transform: translateY(-5px); border-color: rgba(96,165,250,0.3); }
+    .stat b { display: block; font-size: 1.45rem; margin-bottom: 4px; color: #f8fbff; }
+    .stat span { color: var(--muted); font-size: 0.92rem; }
 
     .hero-scroll {
-      position: absolute;
-      left: 32px;
-      bottom: 26px;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.92rem;
-      z-index: 2;
+      position: absolute; left: 32px; bottom: 26px; color: #94a3b8;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.92rem; z-index: 2;
       animation: bounceSoft 2s ease-in-out infinite;
     }
 
-    /* Section title */
-    .section-head {
-      max-width: 1280px;
-      margin: 28px auto 0;
-      padding: 0 22px;
-    }
-
+    .section-head { max-width: 1280px; margin: 28px auto 0; padding: 0 22px; }
     .section-head h3 {
-      font-size: 1.2rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #dbeafe;
-      margin-bottom: 8px;
+      font-size: 1.2rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #dbeafe; margin-bottom: 8px;
     }
+    .section-head p { color: var(--muted); font-size: 0.98rem; }
 
-    .section-head p {
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    /* Cards */
     .grid {
-      max-width: 1280px;
-      margin: 18px auto 0;
+      max-width: 1280px; margin: 18px auto 0;
       padding: 0 22px 60px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -398,9 +224,7 @@
     }
 
     .card {
-      position: relative;
-      padding: 28px;
-      border-radius: 26px;
+      position: relative; padding: 28px; border-radius: 26px;
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.045));
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(18px);
@@ -413,38 +237,17 @@
       isolation: isolate;
     }
 
-    .card:nth-child(1) { animation-delay: .08s; }
-    .card:nth-child(2) { animation-delay: .16s; }
-    .card:nth-child(3) { animation-delay: .24s; }
-    .card:nth-child(4) { animation-delay: .32s; }
-    .card:nth-child(5) { animation-delay: .40s; }
-    .card:nth-child(6) { animation-delay: .48s; }
-    .card:nth-child(7) { animation-delay: .56s; }
-    .card:nth-child(8) { animation-delay: .64s; }
-
     .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(140deg, rgba(96,165,250,0.14), transparent 35%, rgba(167,139,250,0.12));
-      opacity: 0;
-      transition: 0.45s ease;
-      z-index: 0;
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(140deg, rgba(96,165,250,0.14), transparent 35%, rgba(167,139,250,0.12));
+      opacity: 0; transition: 0.45s ease; z-index: 0;
     }
 
     .card::after {
-      content: "";
-      position: absolute;
-      top: -30%;
-      right: -20%;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      content: ""; position: absolute; top: -30%; right: -20%;
+      width: 180px; height: 180px; border-radius: 50%;
       background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 65%);
-      opacity: 0;
-      transition: 0.45s ease;
-      z-index: 0;
+      opacity: 0; transition: 0.45s ease; z-index: 0;
     }
 
     .card:hover {
@@ -455,120 +258,71 @@
         0 0 0 1px rgba(96,165,250,0.16),
         0 0 50px rgba(37,99,235,0.16);
     }
+    .card:hover::before, .card:hover::after { opacity: 1; }
 
-    .card:hover::before,
-    .card:hover::after {
-      opacity: 1;
-    }
-
-    .card-top,
-    .card-bottom,
-    .card h2,
-    .card p {
-      position: relative;
-      z-index: 2;
-    }
+    .card-top, .card-bottom, .card h2, .card p { position: relative; z-index: 2; }
 
     .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 18px;
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 16px; margin-bottom: 18px;
     }
 
     .card-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      font-size: 1.9rem;
+      width: 64px; height: 64px; border-radius: 18px;
+      display: grid; place-items: center; font-size: 1.9rem;
       background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(167,139,250,0.18));
       border: 1px solid rgba(255,255,255,0.09);
       transition: 0.35s ease;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
     }
-
     .card:hover .card-icon {
       transform: scale(1.12) rotate(-6deg);
       box-shadow: 0 14px 34px rgba(96,165,250,0.2);
     }
 
     .card-badge {
-      padding: 8px 12px;
-      border-radius: 999px;
+      padding: 8px 12px; border-radius: 999px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
-      color: #bfdbfe;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
+      color: #bfdbfe; font-size: 0.78rem;
+      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
     }
 
     .card h2 {
-      font-size: 1.45rem;
-      margin-bottom: 10px;
-      color: #f8fbff;
-      transition: color 0.3s ease;
+      font-size: 1.45rem; margin-bottom: 10px;
+      color: #f8fbff; transition: color 0.3s ease;
     }
-
-    .card:hover h2 {
-      color: #7dd3fc;
-    }
+    .card:hover h2 { color: #7dd3fc; }
 
     .card p {
-      color: #cbd5e1;
-      line-height: 1.65;
-      font-size: 0.98rem;
-      margin-bottom: 24px;
+      color: #cbd5e1; line-height: 1.65;
+      font-size: 0.98rem; margin-bottom: 24px;
     }
 
     .card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 12px;
     }
 
     .card-link {
-      color: #e2e8f0;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      color: #e2e8f0; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 10px;
     }
 
-    .arrow {
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover .arrow {
-      transform: translateX(7px);
-    }
+    .arrow { display: inline-block; transition: transform 0.3s ease; }
+    .card:hover .arrow { transform: translateX(7px); }
 
     .card-progress {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 4px;
+      position: absolute; left: 0; bottom: 0; width: 0; height: 4px;
       border-radius: 0 999px 999px 0;
       background: linear-gradient(90deg, #2563eb, #22d3ee, #a78bfa);
-      transition: width 0.45s ease;
-      z-index: 2;
+      transition: width 0.45s ease; z-index: 2;
     }
+    .card:hover .card-progress { width: 100%; }
 
-    .card:hover .card-progress {
-      width: 100%;
-    }
-
-    /* ===== PATWARI SECTION ACCENT ===== */
+    /* ===== PATWARI SECTION ACCENT (Gold) ===== */
     .patwari-grid .card::before {
-      background:
-        linear-gradient(140deg, rgba(245, 179, 66, 0.16), transparent 35%, rgba(167, 139, 250, 0.14));
+      background: linear-gradient(140deg, rgba(245, 179, 66, 0.16), transparent 35%, rgba(167, 139, 250, 0.14));
     }
     .patwari-grid .card:hover {
       border-color: rgba(245, 179, 66, 0.35);
@@ -580,81 +334,78 @@
     .patwari-grid .card-icon {
       background: linear-gradient(135deg, rgba(245, 179, 66, 0.22), rgba(96, 165, 250, 0.18));
     }
-    .patwari-grid .card-badge {
-      color: #fde68a;
-    }
-    .patwari-grid .card:hover h2 {
-      color: #fcd34d;
-    }
-    .patwari-grid .card-progress {
-      background: linear-gradient(90deg, #f5b342, #f59e0b, #a78bfa);
-    }
+    .patwari-grid .card-badge { color: #fde68a; }
+    .patwari-grid .card:hover h2 { color: #fcd34d; }
+    .patwari-grid .card-progress { background: linear-gradient(90deg, #f5b342, #f59e0b, #a78bfa); }
 
+    /* ===== HOSTEL SECTION ACCENT (Cyan/Teal) ===== */
+    .hostel-grid .card::before {
+      background: linear-gradient(140deg, rgba(34, 211, 238, 0.16), transparent 35%, rgba(96, 165, 250, 0.14));
+    }
+    .hostel-grid .card:hover {
+      border-color: rgba(34, 211, 238, 0.35);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(34, 211, 238, 0.22),
+        0 0 50px rgba(34, 211, 238, 0.18);
+    }
+    .hostel-grid .card-icon {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(167, 139, 250, 0.18));
+    }
+    .hostel-grid .card-badge { color: #a5f3fc; }
+    .hostel-grid .card:hover h2 { color: #67e8f9; }
+    .hostel-grid .card-progress { background: linear-gradient(90deg, #22d3ee, #06b6d4, #60a5fa); }
+
+    /* Section taglines */
+    .patwari-tagline, .hostel-tagline {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; padding: 6px 14px;
+      border-radius: 999px; font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    }
     .patwari-tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding: 6px 14px;
-      border-radius: 999px;
       background: linear-gradient(135deg, rgba(245, 179, 66, 0.16), rgba(96, 165, 250, 0.12));
       border: 1px solid rgba(245, 179, 66, 0.3);
       color: #fde68a;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    }
+    .hostel-tagline {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(96, 165, 250, 0.12));
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      color: #a5f3fc;
     }
 
-    .patwari-divider {
-      max-width: 1280px;
-      margin: 30px auto 0;
-      padding: 0 22px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    /* Section dividers */
+    .section-divider {
+      max-width: 1280px; margin: 30px auto 0; padding: 0 22px;
+      display: flex; align-items: center; gap: 14px;
     }
-    .patwari-divider .line {
-      flex: 1;
-      height: 1px;
+    .section-divider .line {
+      flex: 1; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(245,179,66,0.35), transparent);
     }
-    .patwari-divider .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #f5b342;
-      box-shadow: 0 0 16px rgba(245,179,66,0.6);
+    .section-divider.cyan .line {
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,0.35), transparent);
+    }
+    .section-divider .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #f5b342; box-shadow: 0 0 16px rgba(245,179,66,0.6);
+    }
+    .section-divider.cyan .dot {
+      background: #22d3ee; box-shadow: 0 0 16px rgba(34,211,238,0.6);
     }
 
     /* Footer */
-    footer {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 8px 22px 50px;
-    }
-
+    footer { max-width: 1280px; margin: 0 auto; padding: 8px 22px 50px; }
     .footer-box {
-      border-radius: 24px;
-      padding: 24px;
-      text-align: center;
+      border-radius: 24px; padding: 24px; text-align: center;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(14px);
       color: var(--muted);
       box-shadow: var(--shadow);
     }
-
-    .footer-box strong {
-      color: #eef6ff;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .footer-box p {
-      margin-top: 8px;
-      line-height: 1.7;
-    }
+    .footer-box strong { color: #eef6ff; letter-spacing: 0.12em; text-transform: uppercase; }
+    .footer-box p { margin-top: 8px; line-height: 1.7; }
 
     /* Keyframes */
     @keyframes orbFloat {
@@ -662,105 +413,45 @@
       33% { transform: translate(22px,-32px) scale(1.08); }
       66% { transform: translate(-18px,18px) scale(0.95); }
     }
-
     @keyframes driftGrid {
       0% { transform: translateY(0px); }
       50% { transform: translateY(-14px); }
       100% { transform: translateY(0px); }
     }
-
-    @keyframes shimmer {
-      to { transform: translateX(120%); }
-    }
-
+    @keyframes shimmer { to { transform: translateX(120%); } }
     @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 0 0 rgba(96,165,250,0.0), 0 0 24px rgba(96,165,250,0.12);
-      }
-      50% {
-        box-shadow: 0 0 20px rgba(96,165,250,0.2), 0 0 36px rgba(96,165,250,0.2);
-      }
+      0%, 100% { box-shadow: 0 0 0 rgba(96,165,250,0.0), 0 0 24px rgba(96,165,250,0.12); }
+      50% { box-shadow: 0 0 20px rgba(96,165,250,0.2), 0 0 36px rgba(96,165,250,0.2); }
     }
-
-    @keyframes titleFlow {
-      to { background-position: 220% center; }
-    }
-
+    @keyframes titleFlow { to { background-position: 220% center; } }
     @keyframes bounceSoft {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-7px); }
     }
-
     @keyframes revealCard {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes floatStudy {
-      0% {
-        transform: translateY(110vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.08;
-      }
-      90% {
-        opacity: 0.08;
-      }
-      100% {
-        transform: translateY(-15vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.08; }
+      90% { opacity: 0.08; }
+      100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
     }
 
     /* Responsive */
     @media (max-width: 860px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .created-pill {
-        width: 100%;
-        text-align: center;
-      }
-
-      .hero-card {
-        padding: 40px 22px 74px;
-      }
-
-      .hero-scroll {
-        left: 22px;
-      }
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .created-pill { width: 100%; text-align: center; }
+      .hero-card { padding: 40px 22px 74px; }
+      .hero-scroll { left: 22px; }
     }
-
     @media (max-width: 640px) {
-      .hero h1 {
-        line-height: 1;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .card {
-        padding: 24px;
-      }
-
-      .stat {
-        min-width: calc(50% - 7px);
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        justify-content: center;
-      }
+      .hero h1 { line-height: 1; }
+      .grid { grid-template-columns: 1fr; gap: 18px; }
+      .card { padding: 24px; }
+      .stat { min-width: calc(50% - 7px); }
+      .hero-actions { flex-direction: column; }
+      .btn { justify-content: center; }
     }
   </style>
 </head>
@@ -793,7 +484,7 @@
           <div class="tagline">📚 Animated Study Portal Experience</div>
           <h1>Study Smarter.<br />Aim Higher.</h1>
           <p>
-            A modern CGPSC preparation dashboard with immersive motion effects,
+            A modern preparation dashboard with immersive motion effects,
             glowing study-themed backgrounds, premium cards, and a clean layout
             that feels powerful, focused, and inspiring every time you open it.
           </p>
@@ -801,12 +492,13 @@
           <div class="hero-actions">
             <a href="#modules" class="btn btn-primary">Explore Modules ✨</a>
             <a href="#patwari" class="btn btn-secondary">Patwari 2022 📋</a>
+            <a href="#hostel" class="btn btn-secondary">Hostel Superintendent 2023 🏨</a>
           </div>
 
           <div class="hero-stats">
             <div class="stat">
-              <b>14+</b>
-              <span>CGPSC &amp; Patwari modules</span>
+              <b>21+</b>
+              <span>CGPSC, Patwari &amp; Hostel modules</span>
             </div>
             <div class="stat">
               <b>24/7</b>
@@ -831,86 +523,56 @@
 
     <main class="grid">
       <a class="card" href="history.html">
-        <div class="card-top">
-          <div class="card-icon">📖</div>
-          <div class="card-badge">Core</div>
-        </div>
+        <div class="card-top"><div class="card-icon">📖</div><div class="card-badge">Core</div></div>
         <h2>History &amp; Polity</h2>
         <p>Dive into historical foundations, constitutional structure, governance concepts, and political understanding with clarity.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="language.html">
-        <div class="card-top">
-          <div class="card-icon">📝</div>
-          <div class="card-badge">Language</div>
-        </div>
+        <div class="card-top"><div class="card-icon">📝</div><div class="card-badge">Language</div></div>
         <h2>Language</h2>
         <p>Strengthen grammar, comprehension, expression, and answer presentation for better exam performance and confidence.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="science.html">
-        <div class="card-top">
-          <div class="card-icon">🔬</div>
-          <div class="card-badge">Concepts</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🔬</div><div class="card-badge">Concepts</div></div>
         <h2>General Science</h2>
         <p>Learn essential scientific facts, applications, and everyday concepts through an organized and visually attractive interface.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="welfare.html">
-        <div class="card-top">
-          <div class="card-icon">🏅</div>
-          <div class="card-badge">Society</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🏅</div><div class="card-badge">Society</div></div>
         <h2>Welfare, Sports &amp; Education</h2>
         <p>Track important welfare initiatives, sports developments, and education topics in one polished and accessible section.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="economics.html">
-        <div class="card-top">
-          <div class="card-icon">🌍</div>
-          <div class="card-badge">Analysis</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🌍</div><div class="card-badge">Analysis</div></div>
         <h2>Economics &amp; Geography</h2>
         <p>Understand maps, resources, economic systems, development indicators, and regional patterns with a better visual flow.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="tracker.html">
-        <div class="card-top">
-          <div class="card-icon">📊</div>
-          <div class="card-badge">Planner</div>
-        </div>
+        <div class="card-top"><div class="card-icon">📊</div><div class="card-badge">Planner</div></div>
         <h2>UPSC Tracker</h2>
         <p>Organize progress, monitor consistency, and keep your preparation disciplined using a dashboard-style tracking experience.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
     </main>
 
-    <!-- ================= DIVIDER ================= -->
-    <div class="patwari-divider">
+    <!-- ================= DIVIDER (Gold) ================= -->
+    <div class="section-divider">
       <span class="line"></span>
       <span class="dot"></span>
       <span class="line"></span>
@@ -925,106 +587,138 @@
 
     <div class="grid patwari-grid" id="patwari-modules">
       <a class="card" href="patwari.html#computer">
-        <div class="card-top">
-          <div class="card-icon">💻</div>
-          <div class="card-badge">20 Q · 20 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">💻</div><div class="card-badge">20 Q · 20 Marks</div></div>
         <h2>Computer Related General Knowledge</h2>
         <p>Computer basics, main parts, printers, operating systems, office tools, internet, antivirus, multimedia, CD/DVD and search engines.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#hindi">
-        <div class="card-top">
-          <div class="card-icon">📖</div>
-          <div class="card-badge">10 Q · 10 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">📖</div><div class="card-badge">10 Q · 10 Marks</div></div>
         <h2>हिन्दी व्याकरण</h2>
         <p>स्वर, व्यंजन, वर्तनी, लिंग, वचन, काल, संज्ञा, सर्वनाम, समास, संधि, रस, अलंकार, मुहावरे एवं लोकोक्तियाँ।</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#english">
-        <div class="card-top">
-          <div class="card-icon">🔤</div>
-          <div class="card-badge">10 Q · 10 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🔤</div><div class="card-badge">10 Q · 10 Marks</div></div>
         <h2>General English with Grammar</h2>
         <p>Grammar essentials, sentence transformation (voice &amp; narration), vocabulary, synonyms, antonyms, idioms and proverbs.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#maths">
-        <div class="card-top">
-          <div class="card-icon">➗</div>
-          <div class="card-badge">30 Q · 30 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">➗</div><div class="card-badge">30 Q · 30 Marks</div></div>
         <h2>Mathematics</h2>
         <p>Number system, HCF/LCM, algebra, ratio &amp; proportion, percentage, profit &amp; loss, SI &amp; CI, geometry and mensuration.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#mental-ability">
-        <div class="card-top">
-          <div class="card-icon">🧠</div>
-          <div class="card-badge">15 Q · 15 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🧠</div><div class="card-badge">15 Q · 15 Marks</div></div>
         <h2>General Mental Ability</h2>
         <p>Logical reasoning, analogy, number &amp; letter series, missing numbers, figure-based questions, classification and patterns.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#gk">
-        <div class="card-top">
-          <div class="card-icon">🌍</div>
-          <div class="card-badge">35 Q · 35 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🌍</div><div class="card-badge">35 Q · 35 Marks</div></div>
         <h2>General Knowledge</h2>
         <p>Indian polity &amp; constitution, history, national movement, geography, economy, and general science up to Class 10 level.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#current-affairs">
-        <div class="card-top">
-          <div class="card-icon">📰</div>
-          <div class="card-badge">15 Q · 15 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">📰</div><div class="card-badge">15 Q · 15 Marks</div></div>
         <h2>Current Affairs – Sports, National &amp; International</h2>
         <p>Latest national and international events, Chhattisgarh-specific current affairs, and important sports information.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
 
       <a class="card" href="patwari.html#cg-gk">
-        <div class="card-top">
-          <div class="card-icon">🏛️</div>
-          <div class="card-badge">15 Q · 15 Marks</div>
-        </div>
+        <div class="card-top"><div class="card-icon">🏛️</div><div class="card-badge">15 Q · 15 Marks</div></div>
         <h2>General Knowledge of Chhattisgarh</h2>
         <p>History, geography, polity, economy, government schemes, awards, traditions, folk art, music and important personalities of Chhattisgarh.</p>
-        <div class="card-bottom">
-          <span class="card-link">Open Module <span class="arrow">→</span></span>
-        </div>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+    </div>
+
+    <!-- ================= DIVIDER (Cyan) ================= -->
+    <div class="section-divider cyan">
+      <span class="line"></span>
+      <span class="dot"></span>
+      <span class="line"></span>
+    </div>
+
+    <!-- ================= HOSTEL SUPERINTENDENT SECTION ================= -->
+    <section class="section-head" id="hostel">
+      <span class="hostel-tagline">🏨 Hostel Superintendent Grade "D" Recruitment Examination – 2023</span>
+      <h3>Hostel Superintendent 2023 — Syllabus Modules</h3>
+      <p>Total Questions: 100 &nbsp;|&nbsp; Total Marks: 100 — Select a subject to begin.</p>
+    </section>
+
+    <div class="grid hostel-grid" id="hostel-modules">
+      <a class="card" href="hostel.html#computer">
+        <div class="card-top"><div class="card-icon">💻</div><div class="card-badge">30 Q · 30 Marks</div></div>
+        <h2>General Knowledge Related to Computers</h2>
+        <p>Introduction, uses, main parts, printers, OS types, office software, internet, viruses, multimedia, CD/DVD and search engines.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#hindi">
+        <div class="card-top"><div class="card-icon">📖</div><div class="card-badge">5 Q · 5 Marks</div></div>
+        <h2>हिन्दी, व्याकरण सहित</h2>
+        <p>स्वर, व्यंजन, वर्तनी, लिंग, वचन, काल, संज्ञा, सर्वनाम, समास, संधि, उपसर्ग-प्रत्यय, मुहावरे व लोकोक्तियाँ।</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#english">
+        <div class="card-top"><div class="card-icon">🔤</div><div class="card-badge">5 Q · 5 Marks</div></div>
+        <h2>English</h2>
+        <p>Grammar (numbers, gender, articles, pronouns, adjectives, verbs), sentence transformation, and vocabulary essentials.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#maths">
+        <div class="card-top"><div class="card-icon">➗</div><div class="card-badge">25 Q · 25 Marks</div></div>
+        <h2>Mathematics</h2>
+        <p>HCF &amp; LCM, averages, percentage, profit-loss-discount, simple interest, geometry, algebraic identities and mensuration.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#gk">
+        <div class="card-top"><div class="card-icon">🌍</div><div class="card-badge">15 Q · 15 Marks</div></div>
+        <h2>General Knowledge</h2>
+        <p>Indian polity, history, national movement, geography, economy, general science, sports, culture, yoga and nutrition.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#current-affairs">
+        <div class="card-top"><div class="card-icon">📰</div><div class="card-badge">5 Q · 5 Marks</div></div>
+        <h2>Current Affairs, Sports &amp; World Affairs</h2>
+        <p>National and international current events, and important sports-related knowledge from around the world.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
+        <div class="card-progress"></div>
+      </a>
+
+      <a class="card" href="hostel.html#cg-gk">
+        <div class="card-top"><div class="card-icon">🏛️</div><div class="card-badge">5 Q · 5 Marks</div></div>
+        <h2>General Knowledge of Chhattisgarh</h2>
+        <p>History of Chhattisgarh, brief political events, and important personalities of the state.</p>
+        <div class="card-bottom"><span class="card-link">Open Module <span class="arrow">→</span></span></div>
         <div class="card-progress"></div>
       </a>
     </div>
@@ -1033,8 +727,8 @@
       <div class="footer-box">
         <strong>Created by PRASHANT KUMAR</strong>
         <p>
-          Designed for CGPSC &amp; Patwari preparation with premium animations, study-themed visual effects,
-          and a focused interface that feels modern, energetic, and professional.
+          Designed for CGPSC, Patwari &amp; Hostel Superintendent preparation with premium animations,
+          study-themed visual effects, and a focused interface that feels modern, energetic, and professional.
         </p>
       </div>
     </footer>
@@ -1050,10 +744,7 @@
     /* Canvas 1: soft floating particles */
     const bgCanvas = document.getElementById("bg-canvas");
     const bgCtx = bgCanvas.getContext("2d");
-
-    let w = 0;
-    let h = 0;
-    let particles = [];
+    let w = 0, h = 0, particles = [];
 
     function resizeAll() {
       w = bgCanvas.width = window.innerWidth;
@@ -1064,10 +755,7 @@
     }
 
     class SoftParticle {
-      constructor() {
-        this.reset();
-        this.y = Math.random() * h;
-      }
+      constructor() { this.reset(); this.y = Math.random() * h; }
       reset() {
         this.x = Math.random() * w;
         this.y = h + Math.random() * 100;
@@ -1095,21 +783,16 @@
     function initParticles() {
       particles = [];
       const total = Math.min(90, Math.floor(window.innerWidth / 16));
-      for (let i = 0; i < total; i++) {
-        particles.push(new SoftParticle());
-      }
+      for (let i = 0; i < total; i++) particles.push(new SoftParticle());
     }
 
     function animateParticles() {
       bgCtx.clearRect(0, 0, w, h);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
+      particles.forEach(p => { p.update(); p.draw(); });
       requestAnimationFrame(animateParticles);
     }
 
-    /* Canvas 2: constellation network */
+    /* Canvas 2: constellation */
     const constellationCanvas = document.getElementById("constellation-canvas");
     const cCtx = constellationCanvas.getContext("2d");
     let nodes = [];
@@ -1124,20 +807,13 @@
         this.r = Math.random() * 1.8 + 0.8;
       }
       update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
+        this.x += this.vx; this.y += this.vy;
         if (this.x < 0 || this.x > window.innerWidth) this.vx *= -1;
         if (this.y < 0 || this.y > window.innerHeight) this.vy *= -1;
-
         if (pointer.x !== null) {
-          const dx = pointer.x - this.x;
-          const dy = pointer.y - this.y;
+          const dx = pointer.x - this.x, dy = pointer.y - this.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            this.x -= dx * 0.006;
-            this.y -= dy * 0.006;
-          }
+          if (dist < 130) { this.x -= dx * 0.006; this.y -= dy * 0.006; }
         }
       }
       draw() {
@@ -1174,27 +850,16 @@
 
     function animateConstellation() {
       cCtx.clearRect(0, 0, constellationCanvas.width, constellationCanvas.height);
-      nodes.forEach(n => {
-        n.update();
-        n.draw();
-      });
+      nodes.forEach(n => { n.update(); n.draw(); });
       connectNodes();
       requestAnimationFrame(animateConstellation);
     }
 
-    window.addEventListener("mousemove", (e) => {
-      pointer.x = e.clientX;
-      pointer.y = e.clientY;
-    });
+    window.addEventListener("mousemove", (e) => { pointer.x = e.clientX; pointer.y = e.clientY; });
+    window.addEventListener("mouseleave", () => { pointer.x = null; pointer.y = null; });
 
-    window.addEventListener("mouseleave", () => {
-      pointer.x = null;
-      pointer.y = null;
-    });
-
-    /* Floating study symbols */
-    const symbols = ["📚", "🎓", "📝", "💡", "📖", "📊", "🔬", "🌍", "🏅", "⏳", "📋"];
-
+    /* Floating symbols */
+    const symbols = ["📚", "🎓", "📝", "💡", "📖", "📊", "🔬", "🌍", "🏅", "⏳", "📋", "🏨"];
     function createStudySymbol() {
       const el = document.createElement("div");
       el.className = "study-symbol";
@@ -1204,13 +869,9 @@
       el.style.animationDuration = (16 + Math.random() * 16) + "s";
       el.style.animationDelay = Math.random() * 2 + "s";
       document.body.appendChild(el);
-
       setTimeout(() => el.remove(), 34000);
     }
-
-    for (let i = 0; i < 18; i++) {
-      setTimeout(createStudySymbol, i * 700);
-    }
+    for (let i = 0; i < 18; i++) setTimeout(createStudySymbol, i * 700);
     setInterval(createStudySymbol, 1800);
 
     /* Card tilt */
@@ -1219,27 +880,18 @@
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         const rotateY = ((x / rect.width) - 0.5) * 8;
         const rotateX = ((y / rect.height) - 0.5) * -8;
-
         card.style.transform = `translateY(-12px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
-      });
+      card.addEventListener("mouseleave", () => { card.style.transform = ""; });
     });
 
     resizeAll();
     initParticles();
     animateParticles();
     animateConstellation();
-
-    window.addEventListener("resize", () => {
-      resizeAll();
-      initParticles();
-    });
+    window.addEventListener("resize", () => { resizeAll(); initParticles(); });
   </script>
 </body>
 </html>
